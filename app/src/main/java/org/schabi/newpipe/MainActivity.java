@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
 
     private static final int ITEM_ID_SUBSCRIPTIONS = -1;
-    private static final int ITEM_ID_FEED = -2;
     private static final int ITEM_ID_BOOKMARKS = -3;
     private static final int ITEM_ID_DOWNLOADS = -4;
     private static final int ITEM_ID_HISTORY = -5;
@@ -173,6 +172,10 @@ public class MainActivity extends AppCompatActivity {
         int kioskId = 0;
 
         for (final String ks : service.getKioskList().getAvailableKiosks()) {
+            //Don't Render Trending
+            if (ks.equals("Trending")) {
+                continue;
+            }
             drawerLayoutBinding.navigation.getMenu()
                     .add(R.id.menu_tabs_group, kioskId, 0, KioskTranslator
                             .getTranslatedKioskName(ks, this))
@@ -184,9 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.menu_tabs_group, ITEM_ID_SUBSCRIPTIONS, ORDER,
                         R.string.tab_subscriptions)
                 .setIcon(R.drawable.ic_tv);
-        drawerLayoutBinding.navigation.getMenu()
-                .add(R.id.menu_tabs_group, ITEM_ID_FEED, ORDER, R.string.fragment_feed_title)
-                .setIcon(R.drawable.ic_rss_feed);
         drawerLayoutBinding.navigation.getMenu()
                 .add(R.id.menu_tabs_group, ITEM_ID_BOOKMARKS, ORDER, R.string.tab_bookmarks)
                 .setIcon(R.drawable.ic_bookmark);
@@ -269,9 +269,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case ITEM_ID_SUBSCRIPTIONS:
                 NavigationHelper.openSubscriptionFragment(getSupportFragmentManager());
-                break;
-            case ITEM_ID_FEED:
-                NavigationHelper.openFeedFragment(getSupportFragmentManager());
                 break;
             case ITEM_ID_BOOKMARKS:
                 NavigationHelper.openBookmarksFragment(getSupportFragmentManager());
@@ -434,9 +431,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayoutBinding.navigation.getMenu()
                 .add(R.id.menu_tabs_group, ITEM_ID_SUBSCRIPTIONS, ORDER, R.string.tab_subscriptions)
                 .setIcon(R.drawable.ic_tv);
-        drawerLayoutBinding.navigation.getMenu()
-                .add(R.id.menu_tabs_group, ITEM_ID_FEED, ORDER, R.string.fragment_feed_title)
-                .setIcon(R.drawable.ic_rss_feed);
         drawerLayoutBinding.navigation.getMenu()
                 .add(R.id.menu_tabs_group, ITEM_ID_BOOKMARKS, ORDER, R.string.tab_bookmarks)
                 .setIcon(R.drawable.ic_bookmark);

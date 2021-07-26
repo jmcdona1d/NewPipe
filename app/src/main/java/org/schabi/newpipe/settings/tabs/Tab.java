@@ -24,7 +24,6 @@ import org.schabi.newpipe.fragments.list.kiosk.DefaultKioskFragment;
 import org.schabi.newpipe.fragments.list.kiosk.KioskFragment;
 import org.schabi.newpipe.fragments.list.playlist.PlaylistFragment;
 import org.schabi.newpipe.local.bookmark.BookmarkFragment;
-import org.schabi.newpipe.local.feed.FeedFragment;
 import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
 import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
@@ -153,7 +152,6 @@ public abstract class Tab {
         BLANK(new BlankTab()),
         DEFAULT_KIOSK(new DefaultKioskTab()),
         SUBSCRIPTIONS(new SubscriptionsTab()),
-        FEED(new FeedTab()),
         BOOKMARKS(new BookmarksTab()),
         HISTORY(new HistoryTab()),
         KIOSK(new KioskTab()),
@@ -224,31 +222,6 @@ public abstract class Tab {
             return new SubscriptionFragment();
         }
 
-    }
-
-    public static class FeedTab extends Tab {
-        public static final int ID = 2;
-
-        @Override
-        public int getTabId() {
-            return ID;
-        }
-
-        @Override
-        public String getTabName(final Context context) {
-            return context.getString(R.string.fragment_feed_title);
-        }
-
-        @DrawableRes
-        @Override
-        public int getTabIconRes(final Context context) {
-            return R.drawable.ic_rss_feed;
-        }
-
-        @Override
-        public FeedFragment getFragment(final Context context) {
-            return new FeedFragment();
-        }
     }
 
     public static class BookmarksTab extends Tab {
